@@ -4,13 +4,16 @@ import lied.springframework.domain.*;
 import lied.springframework.repositories.CategoryRepository;
 import lied.springframework.repositories.RecipeRepository;
 import lied.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
@@ -24,12 +27,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
         this.categoryRepository = categoryRepository;
     }
 
+    @Transactional
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         initData();
     }
 
     private void initData() {
+
+        log.debug("initializing data");
 
         //Get references to UnitOfMeasures
         Optional<UnitOfMeasure> optionalEachUom = unitOfMeasureRepository.findByDescription("each");
