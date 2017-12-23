@@ -19,7 +19,7 @@ public class Recipe {
 
     private String description;
     private Integer prepTime;
-    private Integer cookTIme;
+    private Integer cookTime;
     private Integer servings;
     private String source;
     private String url;

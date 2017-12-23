@@ -5,4 +5,4 @@
 [http://localhost:8080/index](http://localhost:8080/index)
 
 ### local database...
-[http://localhost:8080/h2-coneole](http://localhost:8080/h2-console)
+[http://localhost:8080/h2-console](http://localhost:8080/h2-console)

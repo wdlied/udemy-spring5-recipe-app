@@ -85,7 +85,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
         Recipe guacamoleRecipe = new Recipe();
         guacamoleRecipe.setDescription("Perfect Guacamole");
         guacamoleRecipe.setPrepTime(10);
-        guacamoleRecipe.setCookTIme(0);
+        guacamoleRecipe.setCookTime(0);
         guacamoleRecipe.setServings(4);
         guacamoleRecipe.setSource("Simply Recipes");
         guacamoleRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
@@ -123,7 +123,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
         Recipe chickenTacoRecipe = new Recipe();
         chickenTacoRecipe.setDescription("Spicy Grilled Chicken Tacos");
         chickenTacoRecipe.setPrepTime(20);
-        chickenTacoRecipe.setCookTIme(15);
+        chickenTacoRecipe.setCookTime(15);
         chickenTacoRecipe.setServings(6);
         chickenTacoRecipe.setSource("Simply Recipes");
         chickenTacoRecipe.setUrl("http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
