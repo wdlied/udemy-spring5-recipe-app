@@ -1,5 +1,6 @@
 package lied.springframework.services;
 
+import lied.springframework.commands.RecipeCommand;
 import lied.springframework.domain.Recipe;
 
 import java.util.Optional;
@@ -9,5 +10,11 @@ public interface RecipeService {
 
     Set<Recipe> getRecipes();
 
-    Recipe findById(long l);
+    Recipe findById(long recipeId);
+
+    RecipeCommand findCommandById(long recipeId);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
+
+    void deleteById(Long idToDelete);
 }

@@ -1,32 +1,40 @@
 package lied.springframework.services;
 
+import lied.springframework.converters.RecipeCommandToRecipe;
+import lied.springframework.converters.RecipeToRecipeCommand;
 import lied.springframework.domain.Recipe;
 import lied.springframework.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
-    RecipeServiceImpl recipeService;
+    private RecipeServiceImpl recipeService;
 
     @Mock
     RecipeRepository recipeRepository;
+    @Mock
+    RecipeCommandToRecipe recipeCommandConverter;
+    @Mock
+    RecipeToRecipeCommand recipeConverter;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeConverter, recipeCommandConverter);
     }
 
     @Test
@@ -59,5 +67,17 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
 
+    }
+
+    @Test
+    public void testDeleteById() throws Exception {
+        //given
+        Long idToDelete = Long.valueOf(2L);
+
+        //when
+        recipeService.deleteById(idToDelete);
+
+        //then
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }
