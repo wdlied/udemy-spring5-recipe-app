@@ -2,7 +2,6 @@ package lied.springframework.controllers;
 
 import lied.springframework.commands.IngredientCommand;
 import lied.springframework.commands.RecipeCommand;
-import lied.springframework.repositories.UnitOfMeasureRepository;
 import lied.springframework.services.IngredientService;
 import lied.springframework.services.RecipeService;
 import lied.springframework.services.UnitOfMeasureService;
@@ -79,7 +78,28 @@ public class IngredientControllerTest {
     }
 
     @Test
-    public void testupdateIngredientForm() throws Exception {
+    public void testNewIngredientForm() throws Exception {
+        //given
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+
+        //when
+        when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
+        when(unitOfMeasureService.listAllUnitsOfMeasure()).thenReturn(new HashSet<>());
+
+        //then
+        mockMvc.perform(get("/recipe/1/ingredient/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("unitOfMeasureList"));
+
+        verify(recipeService, times(1)).findCommandById(anyLong());
+
+    }
+
+    @Test
+    public void testUpdateIngredientForm() throws Exception {
         //given
         IngredientCommand ingredientCommand = new IngredientCommand();
 

@@ -47,7 +47,7 @@
                                     <select class="form-control" name="unitOfMeasure.id">
                                         <option th:each="uomEach : ${unitOfMeasureList}"
                                                 th:value="${uomEach.id}"
-                                                th:selected="${uomEach.id.equals(ingredient.unitOfMeasure.id)}"
+                                                th:selected="${uomEach.id.equals(ingredient?.unitOfMeasure?.id)}"
                                                 th:text="${uomEach.description}">Each</option>
                                     </select>
                                 </div>

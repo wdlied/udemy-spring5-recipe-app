@@ -1,6 +1,7 @@
 package lied.springframework.controllers;
 
 import lied.springframework.commands.IngredientCommand;
+import lied.springframework.commands.RecipeCommand;
 import lied.springframework.services.IngredientService;
 import lied.springframework.services.RecipeService;
 import lied.springframework.services.UnitOfMeasureService;
@@ -68,5 +69,18 @@ public class IngredientController {
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
 
+    }
+
+    @RequestMapping("/recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model) {
+
+        RecipeCommand recipe = recipeService.findCommandById(Long.valueOf(recipeId));
+        IngredientCommand command = new IngredientCommand();
+        command.setRecipeId(recipe.getId());
+
+        model.addAttribute("ingredient", command);
+        model.addAttribute("unitOfMeasureList", unitOfMeasureService.listAllUnitsOfMeasure());
+
+        return "recipe/ingredient/ingredientform";
     }
 }
